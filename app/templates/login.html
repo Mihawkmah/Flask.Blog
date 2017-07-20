@@ -14,7 +14,8 @@
                     </div>
 <!-- 登录表单 -->
                     <div class="panel-body">
-                        <hr>
+
+                        <!-- 验证信息 -->
                         {% with messages = get_flashed_messages() %}
                         {% if messages %}
                         <ul>
@@ -24,6 +25,7 @@
                         </ul>
                         {% endif %}
                         {% endwith %}
+
                     <form action="" method="post" name="login">
                         {{form.hidden_tag()}}
                         <p>

@@ -18,7 +18,6 @@ def get_post(post_id):
     post = Posts.objects(id=post_id).first()
     return render_template('post.html',post=post)
 
-
 @app.route('/editor')
 @login_required
 def editor():
@@ -45,8 +44,11 @@ def login():
             return redirect(url_for('editor'))
     return render_template('login.html',form=form)
 
-
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('.index'))
+    return redirect(url_for('index'))
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('404.html'), 404
