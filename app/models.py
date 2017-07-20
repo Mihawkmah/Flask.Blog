@@ -10,7 +10,6 @@ class User(db.Document):
     username = db.StringField(required=True, max_length=64)
     password = db.StringField(max_length=256)
 
-    # Flask-Login integration
     def is_authenticated(self):
         return True
 
@@ -20,9 +19,8 @@ class User(db.Document):
     def is_anonymous(self):
         return False
 
-    # TypeError: ObjectId('552f41e56a85f00dd043406b') is not JSON serializable
     def get_id(self):
-        return str(self.id)
+        return str(self._id)
 
     def __unicode__(self):
         return self.name

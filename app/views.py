@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import render_template, redirect, url_for , request
+from flask import render_template, redirect, url_for, request, flash
 from app import app, db, lm
 from flask.ext.login import current_user, login_user, logout_user, login_required
 from app.models import Posts, User
@@ -25,22 +25,25 @@ def editor():
     return render_template('editor.html')
 
 @lm.user_loader
-def user_loader(id):
-    user = User.objects(_id=id).first()
+def user_loader(userid):
+    user = User.objects(_id=userid).first()
     return user
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()
-    if request.method == 'GET':
-        return render_template('login.html',form=form)
     if request.method == 'POST' and form.validate():
         username = form.username.data
         password = form.password.data
         user = User.objects(username=username).first()
-        login_user(user)
-        return redirect(url_for('index'))
-    return 'Bad login'
+        if not user:
+            flash('用户名错误')
+        elif password != user.password:
+            flash('密码错误')
+        else:
+            login_user(user)
+            return redirect(url_for('editor'))
+    return render_template('login.html',form=form)
 
 
 @app.route('/logout')
