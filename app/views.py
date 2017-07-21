@@ -7,10 +7,15 @@ from app.models import Posts, User
 from app.forms import LoginForm
 
 @app.route('/')
-@app.route('/<int:page>')
-def index(page=1):
-    paginator = Posts.objects.paginate(page=page, per_page=12)
-    return render_template('index.html', paginator=paginator)
+@app.route('/<string:cate>')
+@app.route('/<string:cate>/<int:page>')
+def index(cate='pm',page=1):
+    pag = Posts.objects(categories=cate)
+    paginator = pag.paginate(page=page, per_page=12)
+    if not pag:
+        return render_template('404.html'), 404
+    else:
+        return render_template('index.html', paginator=paginator,cates=cate)
 
 @app.route('/post/<string:post_id>')
 def get_post(post_id):

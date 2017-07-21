@@ -31,5 +31,6 @@ class Posts(db.Document):
     'strict': False
     }
     title = db.StringField(required=True, max_length=64)
+    categories = db.StringField(max_length=30, required=True)
     content = db.StringField(required=True)
     create_time = db.DateTimeField(default=datetime.now)

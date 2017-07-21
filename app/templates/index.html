@@ -42,7 +42,7 @@
             <ul class="pager">
                 {% if paginator.has_prev %}
                     <li class="previous">
-                        <a href="{{ url_for('index') }}{{ paginator.pre_num }}">&laquo; 上一页</a>
+                        <a href="{{ url_for('index',cate=cates) }}/{{ paginator.prev_num }}">&laquo; 上一页</a>
                     </li>
                 {% else %}
                      <li class="previous disabled">
@@ -52,7 +52,7 @@
 
                 {% if paginator.has_next %}
                     <li class="next">
-                        <a href="{{ url_for('index') }}{{ paginator.next_num }}">下一页 &raquo;</a>
+                        <a href="{{ url_for('index',cate=cates) }}/{{ paginator.next_num }}">下一页 &raquo;</a>
                     </li>
                 {% else %}
                      <li class="next disabled">
