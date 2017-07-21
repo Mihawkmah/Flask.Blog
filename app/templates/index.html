@@ -5,77 +5,63 @@
     <div class="row">
 
 <!-- 主列表 -->
-        <div class="col-xs-9">
+            {% if paginator.iter_pages() %}
+                {% for post in paginator.items %}
 
-{% if paginator.iter_pages() %}
-    {% for post in paginator.items %}
+                <div class="col-md-3">
+                <div class="thumbnail">
+                    <a href="/post/{{ post.id }}">
+                    <img src="/static/thumbnail.jpg" alt="通用的占位符缩略图" style="margin: 0px;">
+                    </a>
 
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a href="/post/{{ post.id }}" class="btn-link">
-                        {{ post.title }}
-                        </a>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="small m-b-xs">
-                        <span class="text-muted">末小山</span> <span class="text-muted">{{ post.create_time.strftime('%Y/%m/%d') }}</span>
+                    <div class="caption">
+                        <p>
+                            <a href="/post/{{ post.id }}" style="text-decoration:none; color: #000000;"> {{ post.title }} </a>
+                        </p>
+                        <p class="small text-muted" style="color: #bbbbbb;">{{ post.content }} </p>
+                        <hr>
+                        <p class="small text-muted" style="color: #bbbbbb;">
+                            <span><img src="/static/thumbnail.jpg" alt="通用的占位符缩略图" class="img-circle" width="15px" height="15px"></span>
+                            <span>&nbsp;末小山</span>
+                            <span class="pull-right">{{ post.create_time.strftime('%Y/%m/%d') }}</span>
+                        </p>
                     </div>
-                    <p>{{ post.content }}</p>
+
                 </div>
-            </div>
+                </div>
 
-
-
-
-    {% endfor %}
-{% endif %}
-
-
-<ul class="pager">
-    {% if paginator.has_prev %}
-        <li class="previous">
-            <a href="{{ url_for('index') }}{{ paginator.pre_num }}">&laquo; 上一页</a>
-        </li>
-    {% else %}
-         <li class="previous disabled">
-            <a href="#">&laquo; 上一页</a>
-        </li>
-    {% endif %}
-
-    {% if paginator.has_next %}
-        <li class="next">
-            <a href="{{ url_for('index') }}{{ paginator.next_num }}">下一页 &raquo;</a>
-        </li>
-    {% else %}
-         <li class="next disabled">
-            <a href="#">下一页 &raquo;</a>
-        </li>
-    {% endif %}
-</ul>
+                {% endfor %}
+            {% endif %}
 
         </div>
-
-<!-- 侧边栏  -->
-        <div class="col-xs-3">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        微信
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <img src="/static/erweima.JPG" class="img-rounded img-thumbnail">
-                </div>
-            </div>
-
-        </div>
-
-
     </div>
-</div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <ul class="pager">
+                {% if paginator.has_prev %}
+                    <li class="previous">
+                        <a href="{{ url_for('index') }}{{ paginator.pre_num }}">&laquo; 上一页</a>
+                    </li>
+                {% else %}
+                     <li class="previous disabled">
+                        <a href="#">&laquo; 上一页</a>
+                    </li>
+                {% endif %}
+
+                {% if paginator.has_next %}
+                    <li class="next">
+                        <a href="{{ url_for('index') }}{{ paginator.next_num }}">下一页 &raquo;</a>
+                    </li>
+                {% else %}
+                     <li class="next disabled">
+                        <a href="#">下一页 &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        </div>
+    </div>
 
     {% endblock %}

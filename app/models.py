@@ -25,7 +25,6 @@ class User(db.Document):
     def __unicode__(self):
         return self.name
 
-
 class Posts(db.Document):
     meta = {
     'collection': 'article',

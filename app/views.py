@@ -9,9 +9,8 @@ from app.forms import LoginForm
 @app.route('/')
 @app.route('/<int:page>')
 def index(page=1):
-    paginator = Posts.objects.paginate(page=page, per_page=5)
+    paginator = Posts.objects.paginate(page=page, per_page=12)
     return render_template('index.html', paginator=paginator)
-
 
 @app.route('/post/<string:post_id>')
 def get_post(post_id):
