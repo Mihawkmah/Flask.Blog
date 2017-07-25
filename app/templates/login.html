@@ -26,24 +26,22 @@
                         {% endif %}
                         {% endwith %}
 
-                    <form action="" method="post" name="login">
-                        {{form.hidden_tag()}}
+                    <form method="post" name="login">
+                        {{ form.hidden_tag() }}
                         <p>
-                            用户名:<br>
-                            {{form.username(size=30)}}<br>
-                            {% for error in form.errors.name %}
-                            <span style="color: red;">[{{ error }}]</span>
+                            用户名：{{ form.username(size=28) }}<br>
+                            {% for error in form.username.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
                             {% endfor %}<br>
                         </p>
                         <p>
-                            密码:<br>
-                            {{form.password(size=30)}}<br>
-                            {% for error in form.errors.password %}
-                            <span style="color: red;">[{{ error }}]</span>
+                            密码：{{ form.password(size=28) }}<br>
+                            {% for error in form.password.errors %}
+                                <span style="color: red;">[{{ error }}]</span>
                             {% endfor %}<br>
                         </p>
-                        <p>{{form.remember_me}} 记住我</p>
-                        <p>{{form.submit}}</p>
+                        <p>{{ form.remember_me }} 记住我</p>
+                        <p>{{ form.submit }}</p>
                     </form>
                     </div>
 

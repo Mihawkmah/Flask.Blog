@@ -13,14 +13,27 @@
                 </div>
                 <div class="panel-body">
 
-                        <form>
-                                   <textarea name="editor1" id="editor1" rows="10" cols="80">
-                                       This is my textarea to be replaced with CKEditor.
-                                   </textarea>
-                                   <script>
-                                       CKEDITOR.replace( 'editor1' );
-                                   </script>
-                        </form>
+                    <form method="post" name="editorpost">
+                    {{ form.hidden_tag() }}
+                    <p>
+                        文章标题：{{ form.title(size=30) }}<br>
+                    </p>
+                    <p>
+                        文章分类：{{ form.categories }}<br>
+                    </p>
+                    <p>
+                        {{ form.ckeditor_demo }}
+                    </p>
+                    <!-- 替换脚本 -->
+                    <script>
+                        CKEDITOR.replace( 'ckeditor_demo' );
+                    </script>
+                    <!--  -->
+                    <p>
+                        {{ form.submit }}
+                    </p>
+                    </form>
+
                 </div>
             </div>
         </div>

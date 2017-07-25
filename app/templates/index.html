@@ -18,7 +18,11 @@
                         <p>
                             <a href="/post/{{ post.id }}" style="text-decoration:none; color: #000000;"> {{ post.title }} </a>
                         </p>
-                        <p class="small text-muted" style="color: #bbbbbb;">{{ post.content }} </p>
+
+                        <p class="small text-muted" style="color: #bbbbbb;">
+                            {{ post.content | striptags | truncate(30) }}
+                        </p>
+
                         <hr>
                         <p class="small text-muted" style="color: #bbbbbb;">
                             <span><img src="/static/thumbnail.jpg" alt="通用的占位符缩略图" class="img-circle" width="15px" height="15px"></span>

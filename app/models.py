@@ -27,7 +27,7 @@ class User(db.Document):
 
 class Posts(db.Document):
     meta = {
-    'collection': 'article',
+    'collection': 'posts',
     'strict': False
     }
     title = db.StringField(required=True, max_length=64)

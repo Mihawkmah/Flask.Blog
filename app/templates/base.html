@@ -22,18 +22,24 @@
     <div class="row">
         <div class="col-xs-12">
 
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+
             <nav class="navbar navbar-default" role="navigation">
               <div class="container-fluid">
               <div class="navbar-header">
-                  <a class="navbar-brand" href="#">末小山</a>
+                  <a class="navbar-brand" href="/">末小山</a>
               </div>
+
               <div>
 
                   <ul class="nav navbar-nav">
-                      <li class="active"><a href="/">产品设计</a></li>
-                      <li><a href="/ucd">交互体验</a></li>
-                      <li><a href="/sketch">原型设计</a></li>
-                      <li><a href="/data">数据分析</a></li>
+                      <li><a href="/">产品</a></li>
+                      <li><a href="/data">数据</a></li>
+                      <li><a href="/book">图书</a></li>
                   </ul>
 
                   <ul class="nav navbar-nav navbar-right">
@@ -44,12 +50,17 @@
                       {% endif %}
 
                       {% if current_user.is_authenticated %}
+                      <li><a href="/editor"><span class="glyphicon glyphicon-edit"></span> 发布</a></li>
+                      {% endif %}
+
+                      {% if current_user.is_authenticated %}
                       <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> 退出</a></li>
                       {% endif %}
 
                   </ul>
 
               </div>
+
               </div>
             </nav>
         </div>

@@ -4,7 +4,7 @@ from flask import render_template, redirect, url_for, request, flash
 from app import app, db, lm
 from flask.ext.login import current_user, login_user, logout_user, login_required
 from app.models import Posts, User
-from app.forms import LoginForm
+from app.forms import LoginForm, EditForm
 
 @app.route('/')
 @app.route('/<string:cate>')
@@ -22,10 +22,18 @@ def get_post(post_id):
     post = Posts.objects(id=post_id).first()
     return render_template('post.html',post=post)
 
-@app.route('/editor')
+@app.route('/editor', methods = ['GET', 'POST'])
 @login_required
 def editor():
-    return render_template('editor.html')
+    form = EditForm()
+    if request.method == 'POST' and form.validate():
+        title = form.title.data
+        categories = form.categories.data
+        content = form.ckeditor_demo.data
+        post = Posts(title = title, categories = categories, content = content)
+        post.save()
+        return '保存成功'
+    return render_template('editor.html',form=form)
 
 @lm.user_loader
 def user_loader(userid):
